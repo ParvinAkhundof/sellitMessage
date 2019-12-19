@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<div><%- include("head.ejs") %></div>
+<div><%- include("search.ejs") %></div>
+
+
+<body>
+
+        <table class="table">
+                
+                    <tr>
+                <%  for(var i=0;i< products.length;i++) {%>
+                   
+                        <% if(i%3==0){  %> </tr><tr> <% } %>
+                        <td >
+
+                                <div class="results" >
+                                        <div class="repo">
+                                            <div class="card-deck">
+                                                <div class="card">
+                                                        
+                                             <img class="rounded " width='200' height="200" alt='avatar' src='<%= products[i].image[0].url%>'  />
+                                             <a href="/api/v1/product/id/<%= products[i].product_id%>" >
+                                             <div  class="w-50">  
+                                             <h4><%= products[i].name%></h4>
+                                                <p><%= products[i].price%></p>
+                                            </div> 
+                                        </a> 
+                                            </div>
+                                            </div> 
+                                        </div>
+                                    </div> 
+                          
+                                  </td>
+                    <% } %>
+                
+                </tr>
+                </table>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Sell It App",
+    "description": "This is going to make it easy for the front end guys to play around with the AP",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api/v1/",
+      "description": "Local Dev"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Sell It api-services",
+      "description": "API for sell it application"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/studentrecord": {
+      "get": {
+        "tags": [
+          "Student Archive"
+        ],
+        "summary": "Get all Student Archive from the database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StudentArchives"
+            }
+          }
+        }
+      }
+    },
+    "/studentrecord/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the student archive record you want to fetch",
+          "type": "number"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Student Archive"
+        ],
+        "summary": "Get Student Archive record By id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StudentArchive"
+            }
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get all products from the database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          }
+        }
+      }
+    },
+    "/product/id/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the product that you want to fetch",
+          "type": "number"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Product By ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Product with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      }
+    },
+    "/product/{product_name}": {
+      "parameters": [
+        {
+          "name": "product_name",
+          "in": "path",
+          "required": true,
+          "description": "name of the product that you want to fetch",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Search for a Product by the product name",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_name",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/product_name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      }
+    },
+    "/product/add": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Create a Product",
+        "requestBody": {
+          "description": "Product Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "id": {
+      "properties": {
+        "id": {
+          "type": "number"
+        }
+      }
+    },
+    "product_name": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "description": {
+          "type": "boolean"
+        },
+        "price": {
+          "type": "string"
+        },
+        "seller_id": {
+          "type": "number"
+        },
+        "more_details": {
+          "type": "string"
+        },
+        "status": {
+          "type": "number"
+        },
+        "category_id": {
+          "type": "number"
+        },
+        "brand_id": {
+          "type": "number"
+        },
+        "product_condition": {
+          "type": "number"
+        },
+        "created_date": {
+          "type": "string"
+        },
+        "modified_date": {
+          "type": "string"
+        }
+      }
+    },
+    "Products": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    },
+    "StudentArchive": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "matrikel_number": {
+          "type": "number"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "created_date": {
+          "type": "string"
+        },
+        "modified_date": {
+          "type": "string"
+        }
+      }
+    },
+    "StudentArchives": {
+      "type": "object",
+      "properties": {
+        "studentarchives": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StudentArchive"
+          }
+        }
+      }
+    }
+  }
+}
